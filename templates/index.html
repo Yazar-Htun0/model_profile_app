@@ -1,25 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Profile App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Welcome to the Model Profile App</h1>
-    </header>
+{% extends "layout.html" %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Welcome to the Model Profile App!</h1>
+        <p class="lead">Showcase your modeling portfolio and connect with agencies and clients.</p>
+        <hr class="my-4">
+        {% if not current_user.is_authenticated %}
+        <p>Join our platform to create your professional profile.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Get Started</a>
+        {% else %}
+        <p>Manage your profile and explore opportunities.</p>
+        <a class="btn btn-info btn-lg" href="{{ url_for('dashboard') }}" role="button">Go to Dashboard</a>
+        {% endif %}
+    </div>
 
-    <main>
-        <p>This is the homepage of your model profile application. We'll start building the profile features here!</p>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Model Profile App</p>
-    </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
-
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <h2>For Models</h2>
+            <p>Create a stunning profile, upload your best photos, and list your experience. Get discovered by top agencies and clients looking for talent like you.</p>
+        </div>
+        <div class="col-md-4">
+            <h2>For Agencies</h2>
+            <p>Browse through a diverse pool of models. Find the perfect match for your campaigns and projects quickly and efficiently.</p>
+        </div>
+        <div class="col-md-4">
+            <h2>For Clients</h2>
+            <p>Discover fresh faces and experienced professionals for your photoshoots, runway shows, and commercial projects. Direct access to model portfolios.</p>
+        </div>
+    </div>
+{% endblock content %}

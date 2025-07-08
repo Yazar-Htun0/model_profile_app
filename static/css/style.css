@@ -29,3 +29,314 @@ footer {
     font-size: 0.9em;
 }
 
+/* Form styling */
+.content-section {
+  background: #ffffff;
+  padding: 20px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control-label {
+  display: block; /* Ensure labels are block for spacing */
+  margin-bottom: 0.5rem;
+}
+
+.form-control { /* General form control styling */
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control-lg { /* specific to larger form controls if used */
+  font-size: 1.25rem;
+  padding: .5rem 1rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+
+.form-control.is-invalid { /* Styling for invalid fields */
+  border-color: #dc3545;
+  padding-right: calc(1.5em + .75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5zM6 8.2h.01L6 8.21z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  display: block; /* Make sure it's visible */
+  margin-top: .25rem;
+  font-size: .875em;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-left: 1.25rem;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: .3rem;
+  margin-left: -1.25rem;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+}
+
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+
+
+/* Alert styling for flash messages */
+.alert {
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+/* Navigation styling */
+header nav { /* More specific selector */
+    background-color: #333; /* Match existing header */
+    padding: 0.75em 1em; /* Adjusted padding */
+    text-align: center;
+}
+
+header nav a { /* More specific selector */
+    color: white;
+    margin: 0 10px; /* Adjusted margin */
+    text-decoration: none;
+    font-size: 1em; /* Adjusted font size */
+}
+
+header nav a:hover { /* More specific selector */
+    text-decoration: underline;
+}
+
+/* Jumbotron for homepage */
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef; /* Lighter background for jumbotron */
+    border-radius: .3rem;
+    text-align: center; /* Center align text in jumbotron */
+}
+
+.jumbotron .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+hr.my-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+/* Utility classes from Bootstrap-like structure, if needed by templates */
+.text-center {
+    text-align: center !important;
+}
+.mt-5 {
+    margin-top: 3rem !important;
+}
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+.pt-3 {
+    padding-top: 1rem !important;
+}
+.ml-2 {
+    margin-left: .5rem !important;
+}
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+.border-top {
+    border-top: 1px solid #dee2e6 !important;
+}
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Basic grid for homepage content if needed */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-4 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .col-md-6 { /* Added from edit_profile.html for consistency */
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Styles moved from edit_profile.html */
+.form-control-file { /* Basic styling for file input */
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Ensure invalid feedback for file inputs is visible, e.g. for image_form */
+.invalid-feedback.d-block {
+    display: block !important;
+}
+
+/* Styling for card headers, moved from public_profile.html for potential global use */
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: .75rem 1.25rem; /* Copied from Bootstrap for consistency */
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card { /* Basic card styling if not using full Bootstrap */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-bottom: 1rem; /* Added for spacing between cards */
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+
+.card-text:last-child {
+    margin-bottom: 0;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+/* For nl2br alternative on public profile text areas */
+.preserve-newlines {
+    white-space: pre-wrap;
+}

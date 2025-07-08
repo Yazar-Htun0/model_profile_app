@@ -1,0 +1,222 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Edit Your Model Profile</legend>
+
+            <div class="form-group">
+                {{ form.full_name.label(class="form-control-label") }}
+                {{ form.full_name(class="form-control form-control-lg") }}
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.age.label(class="form-control-label") }}
+                        {{ form.age(class="form-control form-control-lg") }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.shoe_size.label(class="form-control-label") }}
+                        {{ form.shoe_size(class="form-control form-control-lg") }}
+                    </div>
+                </div>
+            </div>
+
+            <legend class="border-top mt-4 mb-3 pt-3">Measurements</legend>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.height.label(class="form-control-label") }}
+                        {{ form.height(class="form-control form-control-lg", placeholder="e.g., 175") }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.weight.label(class="form-control-label") }}
+                        {{ form.weight(class="form-control form-control-lg", placeholder="e.g., 55") }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.bust.label(class="form-control-label") }}
+                        {{ form.bust(class="form-control form-control-lg", placeholder="e.g., 86") }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.waist.label(class="form-control-label") }}
+                        {{ form.waist(class="form-control form-control-lg", placeholder="e.g., 60") }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.hips.label(class="form-control-label") }}
+                        {{ form.hips(class="form-control form-control-lg", placeholder="e.g., 90") }}
+                    </div>
+                </div>
+            </div>
+
+            <legend class="border-top mt-4 mb-3 pt-3">Contact & Social</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.phone_number.label(class="form-control-label") }}
+                        {{ form.phone_number(class="form-control form-control-lg") }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.instagram_handle.label(class="form-control-label") }}
+                        {{ form.instagram_handle(class="form-control form-control-lg", placeholder="@yourhandle") }}
+                    </div>
+                </div>
+            </div>
+
+            <legend class="border-top mt-4 mb-3 pt-3">Experience & Skills</legend>
+            <div class="form-group">
+                {{ form.work_experience_summary.label(class="form-control-label") }}
+                {{ form.work_experience_summary(class="form-control form-control-lg", rows=5) }}
+            </div>
+            <div class="form-group">
+                {{ form.skills_summary.label(class="form-control-label") }}
+                {{ form.skills_summary(class="form-control form-control-lg", rows=3) }}
+            </div>
+
+            <legend class="border-top mt-4 mb-3 pt-3">Location & Availability</legend>
+            <div class="form-group">
+                {{ form.based_in_city.label(class="form-control-label") }}
+                {{ form.based_in_city(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group form-check">
+                {{ form.willing_to_travel(class="form-check-input") }}
+                {{ form.willing_to_travel.label(class="form-check-label") }}
+            </div>
+            <div class="form-group">
+                {{ form.availability_status.label(class="form-control-label") }}
+                {{ form.availability_status(class="form-control form-control-lg") }}
+            </div>
+
+        </fieldset>
+        <div class="form-group mt-4">
+            {{ form.submit(class="btn btn-outline-info", name="submit_profile") }}
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary ml-2">Cancel Changes</a>
+        </div>
+    </form>
+
+    <hr class="mt-5 mb-4">
+
+    <div class="content-section">
+        <legend class="border-bottom mb-4">Manage Your Portfolio Images</legend>
+
+        <!-- Image Upload Form -->
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ image_form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="mb-3">Upload New Image</legend>
+                <div class="form-group">
+                    {{ image_form.image.label(class="form-control-label") }}
+                    {{ image_form.image(class="form-control-file") }} <!-- Use form-control-file for bootstrap styling -->
+                    {% if image_form.image.errors %}
+                        <div class="invalid-feedback d-block"> <!-- Ensure errors are block displayed -->
+                            {% for error in image_form.image.errors %}
+                                <span>{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ image_form.caption.label(class="form-control-label") }}
+                    {{ image_form.caption(class="form-control form-control-lg") }}
+                     {% if image_form.caption.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in image_form.caption.errors %}
+                                <span>{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group mt-3">
+                {{ image_form.submit(class="btn btn-success", name="submit_image") }}
+            </div>
+        </form>
+
+        <!-- Display Existing Images -->
+        {% if portfolio_images %}
+            <h3 class="mt-5 mb-3">Your Current Portfolio</h3>
+            <div class="row portfolio-gallery">
+                {% for image in portfolio_images %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='uploads/portfolio_images/' + image.image_filename) }}"
+                             class="card-img-top portfolio-thumbnail" alt="{{ image.caption or 'Portfolio image' }}">
+                        <div class="card-body">
+                            {% if image.caption %}
+                            <p class="card-text">{{ image.caption }}</p>
+                            {% endif %}
+                            <form method="POST" action="{{ url_for('delete_portfolio_image', image_id=image.id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this image?');">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mt-4">You have not uploaded any portfolio images yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.portfolio-gallery .card {
+    transition: transform .2s;
+}
+.portfolio-gallery .card:hover {
+    transform: scale(1.05);
+}
+.portfolio-thumbnail {
+    width: 100%;
+    height: 200px; /* Or your preferred fixed height */
+    object-fit: cover; /* This will cover the area, cropping if necessary */
+}
+.form-control-file { /* Basic styling for file input if not using Bootstrap fully */
+    display: block;
+    margin-top: 0.5rem;
+}
+/* Ensure invalid feedback for file inputs is visible */
+.invalid-feedback.d-block {
+    display: block !important;
+}
+
+/* Simple row/col for this form if not using a full CSS framework */
+/* Simple row/col for this form if not using a full CSS framework */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px; /* Or adjust as needed */
+    margin-left: -15px; /* Or adjust as needed */
+}
+.col-md-4, .col-md-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px; /* Or adjust as needed */
+    padding-left: 15px; /* Or adjust as needed */
+}
+@media (min-width: 768px) { /* 'md' breakpoint */
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+</style>
+{% endblock content %}

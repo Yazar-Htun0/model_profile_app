@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <h1>Dashboard</h1>
+        <p>Welcome to your dashboard, {{ current_user.username }}!</p>
+        <p>This is a protected page. Only logged-in users can see this.</p>
+        <p>Your email is: {{ current_user.email }}</p>
+
+        <hr>
+
+        <h2>Your Model Profile</h2>
+        {% if current_user.profile and current_user.profile.full_name %}
+            <p><strong>Name:</strong> {{ current_user.profile.full_name }}</p>
+            <p>
+                <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Edit Your Profile</a>
+                <a href="{{ url_for('public_profile', username=current_user.username) }}" class="btn btn-info">View Your Public Profile</a>
+            </p>
+        {% elif current_user.profile %}
+             <p>Your profile is started but seems incomplete (e.g. no full name).</p>
+             <p>
+                <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Complete Your Profile</a>
+                <a href="{{ url_for('public_profile', username=current_user.username) }}" class="btn btn-info">View Your Public Profile Preview</a>
+            </p>
+        {% else %}
+            <p>You haven't created your model profile yet.</p>
+            <p><a href="{{ url_for('edit_profile') }}" class="btn btn-success">Create Your Profile Now</a></p>
+        {% endif %}
+
+        <h2 class="mt-5">Next Steps</h2>
+        <ul>
+            <li>Complete all sections of your profile.</li>
+            <li>Upload your portfolio pictures (feature coming next!).</li>
+            <li>Share your public profile link.</li>
+        </ul>
+    </div>
+{% endblock content %}

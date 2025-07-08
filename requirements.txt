@@ -1,1 +1,9 @@
-Flask==2.3.3
+Flask>=2.0.0
+Flask-Login>=0.6.0
+Flask-WTF>=1.0.0
+Flask-SQLAlchemy>=2.5.0
+Werkzeug>=2.0.0
+SQLAlchemy>=1.4.0 # Explicitly adding SQLAlchemy as it's a core dependency for Flask-SQLAlchemy
+email-validator>=2.0.0 # For email validation in WTForms
+pytest>=7.0.0
+pytest-flask>=1.2.0

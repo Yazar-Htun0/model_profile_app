@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-header text-center mb-4">
+                <h1>{{ user.username }}'s Profile</h1>
+                {% if profile and profile.full_name %}
+                    <h2>{{ profile.full_name }}</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if profile %}
+    <div class="row">
+        <!-- Left Column for Basic Info & Contact -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">Basic Information</div>
+                <div class="card-body">
+                    {% if profile.age %}
+                        <p><strong>Age:</strong> {{ profile.age }}</p>
+                    {% endif %}
+                    {% if profile.height %}
+                        <p><strong>Height:</strong> {{ profile.height }} cm</p>
+                    {% endif %}
+                    {% if profile.weight %}
+                        <p><strong>Weight:</strong> {{ profile.weight }} kg</p>
+                    {% endif %}
+                    <p class="mt-2 mb-1"><strong>Measurements:</strong></p>
+                    {% if profile.bust or profile.waist or profile.hips %}
+                        <ul class="list-unstyled ml-3">
+                            {% if profile.bust %}<li>Bust: {{ profile.bust }} cm</li>{% endif %}
+                            {% if profile.waist %}<li>Waist: {{ profile.waist }} cm</li>{% endif %}
+                            {% if profile.hips %}<li>Hips: {{ profile.hips }} cm</li>{% endif %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">Not specified.</p>
+                    {% endif %}
+                    {% if profile.shoe_size %}
+                        <p><strong>Shoe Size:</strong> {{ profile.shoe_size }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">Contact & Location</div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> {{ user.email }}</p> {# Assuming email is public #}
+                    {% if profile.phone_number %}
+                        <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+                    {% endif %}
+                    {% if profile.instagram_handle %}
+                        <p><strong>Instagram:</strong> <a href="https://instagram.com/{{ profile.instagram_handle|replace('@','') }}" target="_blank">{{ profile.instagram_handle }}</a></p>
+                    {% endif %}
+                    <hr>
+                    {% if profile.based_in_city %}
+                        <p><strong>Based in:</strong> {{ profile.based_in_city }}</p>
+                    {% endif %}
+                    <p><strong>Willing to travel:</strong> {{ "Yes" if profile.willing_to_travel else "No" }}</p>
+                </div>
+            </div>
+             <div class="card mb-4">
+                <div class="card-header">Availability</div>
+                <div class="card-body">
+                    {% if profile.availability_status %}
+                        <p>{{ profile.availability_status }}</p>
+                    {% else %}
+                        <p class="text-muted">Not specified.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column for Experience, Skills & Portfolio -->
+        <div class="col-md-8">
+            {% if profile.work_experience_summary %}
+            <div class="card mb-4">
+                <div class="card-header">Work Experience</div>
+                <div class="card-body">
+                    <p>{{ profile.work_experience_summary | nl2br }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if profile.skills_summary %}
+            <div class="card mb-4">
+                <div class="card-header">Skills</div>
+                <div class="card-body">
+                    <p>{{ profile.skills_summary | nl2br }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="card mb-4">
+                <div class="card-header">Portfolio</div>
+                <div class="card-body">
+                    {% if portfolio_images %}
+                        <div class="row portfolio-gallery-public">
+                            {% for image in portfolio_images %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="portfolio-item">
+                                    <a href="{{ url_for('static', filename='uploads/portfolio_images/' + image.image_filename) }}" data-toggle="lightbox" data-gallery="portfolio-gallery" data-title="{{ image.caption or '' }}">
+                                        <img src="{{ url_for('static', filename='uploads/portfolio_images/' + image.image_filename) }}"
+                                             class="img-fluid portfolio-thumbnail-public" alt="{{ image.caption or 'Portfolio image for ' + user.username }}">
+                                    </a>
+                                    {% if image.caption %}
+                                        <p class="image-caption text-center mt-2">{{ image.caption }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">No portfolio images uploaded yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                This user has not created a detailed model profile yet.
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if current_user == user %}
+        <div class="text-center mt-4 mb-5">
+            <a href="{{ url_for('edit_profile') }}" class="btn btn-secondary">Edit Your Profile</a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Simple Lightbox CSS and JS (Example using Bootstrap's modal for a very basic lightbox) -->
+<!-- Or integrate a library like Ekko Lightbox or Lightgallery.js -->
+<style>
+.portfolio-thumbnail-public {
+    width: 100%;
+    height: 250px; /* Adjust as needed */
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.portfolio-thumbnail-public:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.portfolio-item .image-caption {
+    font-size: 0.9em;
+    color: #555;
+}
+.card-header {
+    background-color: #f8f9fa; /* Light grey background for card headers */
+    font-weight: bold;
+}
+</style>
+
+<!-- For Lightbox functionality (using Bootstrap's JS for data-toggle="lightbox") -->
+<!-- Make sure Bootstrap JS and Popper.js are included in your main layout if you use this. -->
+<!-- For a more advanced lightbox, a dedicated JS library is recommended. -->
+<!-- This example uses a common library pattern; actual implementation depends on the chosen lightbox library. -->
+<!-- For example, if using Bootstrap 5 Lightbox (bs5-lightbox.js) -->
+<script type="module">
+    // Example: If using a lightbox library like bs5-lightbox
+    // import Lightbox from 'bs5-lightbox'; // Make sure this path is correct or it's globally available
+    // const options = {
+    //     keyboard: true,
+    //     size: 'xl'
+    // };
+    // document.querySelectorAll('[data-toggle="lightbox"]').forEach(el => el.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     const lightbox = new Lightbox(el, options);
+    //     lightbox.show();
+    // }));
+</script>
+
+{% endblock %}
