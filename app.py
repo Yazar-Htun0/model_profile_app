@@ -1,22 +1,23 @@
 # app.py
 
 from flask import Flask, render_template, redirect, url_for, flash, request
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+
+from extensions import db # Import db from extensions
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24) # Needed for session management and CSRF protection
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app) # Initialize db with app
 
-db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login' # The route to redirect to if login is required
 login_manager.login_message_category = 'info' # Flash message category
 
-from models import User # Import the User model
+from models import User, ModelProfile, PortfolioImage # Import models here
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -33,7 +34,6 @@ def home():
 
 # Import forms
 from forms import RegistrationForm, LoginForm, ModelProfileForm, PortfolioImageForm
-from models import User, ModelProfile, PortfolioImage # Import PortfolioImage
 from werkzeug.utils import secure_filename
 import uuid # For generating unique filenames
 

@@ -103,7 +103,7 @@
 
         </fieldset>
         <div class="form-group mt-4">
-            {{ form.submit(class="btn btn-outline-info", name="submit_profile") }}
+            {{ form.submit(class="btn btn-outline-info") }}
             <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary ml-2">Cancel Changes</a>
         </div>
     </form>
@@ -142,7 +142,7 @@
                 </div>
             </fieldset>
             <div class="form-group mt-3">
-                {{ image_form.submit(class="btn btn-success", name="submit_image") }}
+                {{ image_form.submit(class="btn btn-success") }}
             </div>
         </form>
 

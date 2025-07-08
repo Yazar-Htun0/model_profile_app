@@ -1,4 +1,4 @@
-from app import db # Import db instance from app.py
+from extensions import db # Import db instance from extensions.py
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
